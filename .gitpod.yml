@@ -1,0 +1,17 @@
+image: gitpod/workspace-full:latest
+
+tasks:
+  - init: |
+      pip install -r requirements.txt || true
+      npm install || true
+
+ports:
+  - port: 3000
+    onOpen: open-preview
+
+vscode:
+  extensions:
+    - ms-python.python
+    - ms-toolsai.jupyter
+    - esbenp.prettier-vscode
+    - dbaeumer.vscode-eslint
