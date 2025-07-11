@@ -98,3 +98,6 @@ pytest
 
 - [Fake Store API Documentation](https://fakestoreapi.com/docs)
 - [pytest documentation](https://docs.pytest.org/)
+
+
+Added some info for fun :) 
