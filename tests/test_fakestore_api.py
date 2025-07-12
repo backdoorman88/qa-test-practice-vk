@@ -106,3 +106,5 @@ class TestFakeStoreAPI:
         assert del_response.status_code == 200
         deleted = del_response.json()
         assert str(deleted.get("id")) == str(product_id)
+
+# Add config changes
