@@ -1,0 +1,2 @@
+# Ігнорувати лише workspace-налаштування VS Code
+.vscode/settings.json
