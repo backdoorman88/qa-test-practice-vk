@@ -4,7 +4,9 @@ import json
 import logging
 from pathlib import Path
 
-DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data" 
+# Logging is configured in pytest.ini, так що налаштовувати його тут не потрібно.
+# DATA_DIR має вказувати на кореневу папку data (дві папки вище від tests/OtherModules)
+DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
 
 def load_payload():
     """Load test product data from JSON file."""
@@ -26,7 +28,7 @@ def log_request_response(method, url, req_body, response):
 def product_teardown():
     """
     Fixture to register product IDs for deletion after a test.
-    Call product_teardown(product_id) in your test after creating a product.
+    Викликайте product_teardown(product_id) у тесті після створення продукту.
     """
     created_ids = []
     def register(product_id):
@@ -93,11 +95,9 @@ class TestFakeStoreAPI:
         data = post_response.json()
         product_id = data.get("id")
         assert product_id is not None
-
         del_url = f"{url}/{product_id}"
         del_response = requests.delete(del_url)
         log_request_response("DELETE", del_url, None, del_response)
         assert del_response.status_code == 200
         deleted = del_response.json()
         assert deleted is None
-
