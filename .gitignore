@@ -1,2 +1,5 @@
-# Ігнорувати лише workspace-налаштування VS Code
 .vscode/settings.json
+__pycache__/
+*.py[cod]
+venv/
+.venv/
