@@ -15,7 +15,6 @@ def test_delete_users():
 
     del_resp = requests.delete(f"{base_url}/{user_id}")
     assert del_resp.status_code == 200
-
-   deleted = del_resp.json()
+    deleted = del_resp.json()
     assert isinstance(deleted, dict)
     assert deleted.get("id") == user_id
