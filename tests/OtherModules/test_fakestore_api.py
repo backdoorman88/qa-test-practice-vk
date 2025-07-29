@@ -4,8 +4,7 @@ import json
 import logging
 from pathlib import Path
 
-# Logging is configured in pytest.ini, so we don't need to set it up here.
-DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data" 
 
 def load_payload():
     """Load test product data from JSON file."""
@@ -61,11 +60,10 @@ class TestFakeStoreAPI:
         assert data.get("category") == payload["category"]
         product_id = data.get("id")
         assert product_id is not None
-        product_teardown(product_id)  # Register for cleanup
+        product_teardown(product_id)
 
     def test_put_product(self, product_teardown):
         """Test updating an existing product."""
-        # First, create a product to update
         url = "https://fakestoreapi.com/products"
         payload = load_payload()
         post_response = requests.post(url, json=payload)
@@ -74,9 +72,8 @@ class TestFakeStoreAPI:
         data = post_response.json()
         product_id = data.get("id")
         assert product_id is not None
-        product_teardown(product_id)  # Register for cleanup
+        product_teardown(product_id)
 
-        # Now, update it with PUT
         put_url = f"{url}/{product_id}"
         updated_payload = payload.copy()
         updated_payload["title"] = "Updated Product Title"
@@ -88,7 +85,6 @@ class TestFakeStoreAPI:
 
     def test_delete_product(self):
         """Test deleting a product."""
-        # First, create a product to delete
         url = "https://fakestoreapi.com/products"
         payload = load_payload()
         post_response = requests.post(url, json=payload)
@@ -98,7 +94,6 @@ class TestFakeStoreAPI:
         product_id = data.get("id")
         assert product_id is not None
 
-        # Now, delete it
         del_url = f"{url}/{product_id}"
         del_response = requests.delete(del_url)
         log_request_response("DELETE", del_url, None, del_response)
@@ -106,4 +101,3 @@ class TestFakeStoreAPI:
         deleted = del_response.json()
         assert str(deleted.get("id")) == str(product_id)
 
-# Add config changes

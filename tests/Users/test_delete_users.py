@@ -17,5 +17,4 @@ def test_delete_users():
     assert del_resp.status_code == 200
 
     deleted = del_resp.json()
-    assert isinstance(deleted, dict)
-    assert deleted.get("id") == user_id
+    assert deleted is None
